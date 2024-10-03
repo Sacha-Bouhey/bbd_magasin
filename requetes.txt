@@ -1,0 +1,41 @@
+-- Lister les fournisseurs
+SELECT nom FROM fournisseur;
+
+--Lister les produits avec somme en stock et magasin
+SELECT produit.nom, disposer.quantite as "quantité en magasin", stocker.quantite as "quantité en stock" FROM produit 
+JOIN disposer ON produit.id = disposer.id_produit 
+JOIN stocker ON produit.id = stocker.id_produit;
+
+--Listes des produit par fournisseurs
+SELECT fournisseur.nom, produit.nom FROM fournir 
+JOIN fournisseur ON fournisseur.id = fournir.id_fournisseur 
+JOIN produit ON produit.id = fournir.id_produit 
+ORDER BY fournisseur.nom ASC;
+
+--consulter la position d'un probduit dans le stock/dans le magasin
+SELECT produit.nom, rayon.nom as "Nom rayon", entrepot.numero_rangee as "Numéro rangée" FROM produit 
+JOIN disposer ON produit.id = disposer.id_produit 
+JOIN rayon ON disposer.id_rayon = rayon.id 
+JOIN stocker ON produit.id = stocker.id_produit 
+JOIN entrepot ON stocker.id_entrepot = entrepot.id;
+
+--Lister les produits faible en stock (<2)
+SELECT produit.nom, stocker.quantite FROM produit 
+JOIN stocker ON produit.id = stocker.id_produit 
+WHERE stocker.quantite < 2;
+
+--Consulter les marges de chaque produit pour chaque fournisseur
+SELECT produit.nom,
+
+
+--Fin SELECT
+
+--Ranger un produit stock / magasin
+
+--Ajout fournisseur
+
+--Ajout produit
+
+--Modifier un produit
+
+--Deplacer produit magasin <-> stock Si qté = 0 supprimer
