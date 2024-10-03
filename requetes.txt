@@ -3,8 +3,8 @@ SELECT nom FROM fournisseur;
 
 --Lister les produits avec somme en stock et magasin
 SELECT produit.nom, disposer.quantite as "quantité en magasin", stocker.quantite as "quantité en stock" FROM produit 
-JOIN disposer ON produit.id = disposer.id_produit 
-JOIN stocker ON produit.id = stocker.id_produit;
+LEFT JOIN disposer ON produit.id = disposer.id_produit 
+LEFT JOIN stocker ON produit.id = stocker.id_produit;
 
 --Listes des produit par fournisseurs
 SELECT fournisseur.nom, produit.nom FROM fournir 
@@ -25,7 +25,8 @@ JOIN stocker ON produit.id = stocker.id_produit
 WHERE stocker.quantite < 2;
 
 --Consulter les marges de chaque produit pour chaque fournisseur
-SELECT produit.nom, fournir.prix_fournisseur, produit.prix_vente, produit.prix_vente - fournir.prix_fournisseur AS "Marge" FROM produit JOIN fournir ON produit.id = fournir.id_produit;
+SELECT produit.nom, fournir.prix_fournisseur, produit.prix_vente, produit.prix_vente - fournir.prix_fournisseur AS "Marge" FROM produit 
+JOIN fournir ON produit.id = fournir.id_produit;
 
 
 --Fin SELECT
