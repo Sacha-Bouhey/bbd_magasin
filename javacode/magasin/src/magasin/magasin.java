@@ -16,7 +16,11 @@ public class magasin {
         BDDmagasin magasin = new BDDmagasin();
         
         magasin.Connexion("jdbc:mysql://localhost/magasin", "root", "@123+aze$");
-        Object tableau = magasin.bddFournisseurLister();
+        Object[] fournisseurs = (Object[]) magasin.bddFournisseurLister();
+        
+        for(Object fournisseur : fournisseurs) {
+            System.out.println(fournisseur);
+        }
     }
     
 }
