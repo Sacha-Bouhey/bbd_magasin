@@ -18,8 +18,10 @@ public class magasin {
         magasin.Connexion("jdbc:mysql://localhost/magasin", "root", "@123+aze$");
         ArrayList<Object[]> fournisseurs = magasin.bddFournisseurLister();
         
-        for(Object fournisseur : fournisseurs) {
-            System.out.println(fournisseur);
+        for(Object[] row  : fournisseurs) {
+            for(Object column : row ){
+                System.out.println(column);
+            }
         }
     }
     
