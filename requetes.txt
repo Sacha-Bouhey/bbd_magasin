@@ -32,11 +32,46 @@ JOIN fournir ON produit.id = fournir.id_produit;
 --Fin SELECT
 
 --Ranger un produit stock / magasin
+--Dans magasin
+INSERT INTO presenter (id_produit, id_entrepot, quantite)
+VALUES (6, 1, 500);
+
+
+--Dans stock
+INSERT INTO stocker (id_produit, id_magasin, quantite)
+VALUES (6, 1, 500);
+
 
 --Ajout fournisseur
+INSERT INTO fournisseur (nom) VALUES ('ArmyUniverse');
+
 
 --Ajout produit
+INSERT INTO produit (nom, marque, prix_vente, reference) VALUES ('nom', 'marque', 'prix_vente', 'reference');
+
 
 --Modifier un produit
+UPDATE produit
+SET nom = 'nouveau_nom', marque = 'nouvelle marque', prix_vente = 'nouveau_prix', reference = 'nouvelle_reference'
+WHERE id = 1;
+
 
 --Deplacer produit magasin <-> stock Si qté = 0 supprimer
+--depuis magasin vers stock
+UPDATE STOCKER
+SET quantite = quantite + 1
+WHERE id_produit = 1;
+
+UPDATE disposer
+SET quantite = quantite - 1
+WHERE id_produit = 1;
+
+
+--Depuis stock vers magasin
+UPDATE disposer
+SET quantite = quantite + 1
+WHERE id_produit = 1;
+
+UPDATE STOCKER
+SET quantite = quantite - 1
+WHERE id_produit = 1;
