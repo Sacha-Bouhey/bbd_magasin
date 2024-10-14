@@ -1,7 +1,7 @@
 package magasin;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author s.bouhey
@@ -16,7 +16,7 @@ public class magasin {
         BDDmagasin magasin = new BDDmagasin();
         
         magasin.Connexion("jdbc:mysql://localhost/magasin", "root", "@123+aze$");
-        Object[] fournisseurs = (Object[]) magasin.bddFournisseurLister();
+        ArrayList<Object[]> fournisseurs = magasin.bddFournisseurLister();
         
         for(Object fournisseur : fournisseurs) {
             System.out.println(fournisseur);

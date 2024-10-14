@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 public class BDD {
 
@@ -50,19 +51,21 @@ public class BDD {
         return true;
     }
     
-    public Object transformResult(ResultSet resultSet) {
+    public ArrayList<Object[]> transformResult(ResultSet resultSet) {
         try {
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
-            
+            ArrayList<Object[]> objects = new ArrayList<>();
             while (resultSet.next()) {
                 Object[] rowData = new Object[columnCount];
+
                 
                 // Récupération des valeurs de chaque colonne
                 for (int i = 1; i <= columnCount; i++) {   
                     rowData[i - 1] = resultSet.getObject(i);
-                } return rowData;
-            } 
+                    
+                }objects.addLast(rowData);
+            }  return objects;
         } catch (SQLException ex) {
             Logger.getLogger(BDDmagasin.class.getName()).log(Level.SEVERE, null, ex);
         } return null;
