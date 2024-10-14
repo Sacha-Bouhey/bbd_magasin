@@ -15,14 +15,25 @@ public class magasin {
     public static void main(String[] args) {
         BDDmagasin magasin = new BDDmagasin();
         
-        magasin.Connexion("jdbc:mysql://localhost/magasin", "root", "@123+aze$");
+        magasin.Connexion("jdbc:mysql://localhost/magasin", "s.bouhey", "@123+aze$");
         ArrayList<Object[]> fournisseurs = magasin.bddFournisseurLister();
         
-        for(Object[] row  : fournisseurs) {
-            for(Object column : row ){
-                System.out.println(column);
-            }
+        tableMaker(fournisseurs);
+        tableMaker(magasin.bddProduitSommeMagasin());
+        
         }
+    
+    public static void tableMaker(ArrayList<Object[]> sqlResult) {
+            StringBuilder table = new StringBuilder();
+            for (Object[] row : sqlResult) {
+                for (Object column : row) {
+                    table.append(column).append("\t");
+                }
+                table.append("\n");
+            }
+        
+        System.out.println(table.toString());
+        
     }
     
 }

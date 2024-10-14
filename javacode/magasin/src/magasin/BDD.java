@@ -52,23 +52,30 @@ public class BDD {
     }
     
     public ArrayList<Object[]> transformResult(ResultSet resultSet) {
+        ArrayList<Object[]> results = new ArrayList<>();
         try {
             ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            ArrayList<Object[]> objects = new ArrayList<>();
-            while (resultSet.next()) {
-                Object[] rowData = new Object[columnCount];
+            int compteColone = metaData.getColumnCount();
 
-                
-                // Récupération des valeurs de chaque colonne
-                for (int i = 1; i <= columnCount; i++) {   
-                    rowData[i - 1] = resultSet.getObject(i);
-                    
-                }objects.addLast(rowData);
-            }  return objects;
-        } catch (SQLException ex) {
-            Logger.getLogger(BDDmagasin.class.getName()).log(Level.SEVERE, null, ex);
-        } return null;
+            // Add column names as the first row
+            String[] nomColone = new String[compteColone];
+            for (int i = 1; i <= compteColone; i++) {
+                nomColone[i - 1] = metaData.getColumnName(i);
+            }
+            results.add(nomColone);
+
+            // Add the rest of the rows
+            while (resultSet.next()) {
+                Object[] row = new Object[compteColone];
+                for (int i = 1; i <= compteColone; i++) {
+                    row[i - 1] = resultSet.getObject(i);
+                }
+                results.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
     }
     
     public ResultSet getResultSet() { return resultSet; }
